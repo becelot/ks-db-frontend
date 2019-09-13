@@ -11,6 +11,11 @@ import { FileViewerComponent } from './components/file-viewer/file-viewer.compon
 import { DocumentComponent } from './components/document/document.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
+import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -26,9 +31,15 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
+    PerfectScrollbarModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
