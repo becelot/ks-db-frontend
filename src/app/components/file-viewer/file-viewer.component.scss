@@ -1,0 +1,25 @@
+
+:host {
+  box-sizing: border-box;
+  position: relative;
+
+  flex: 1 0 0;
+  display: flex;
+}
+
+.file-viewer-container {
+  margin: 5px;
+  border-radius: 7px;
+  padding: 20px;
+  background: azure;
+  position: relative;
+
+  flex: 1 0 0;
+  box-shadow: inset 0 0 10px 2px #303030;
+}
+
+.file-content {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
