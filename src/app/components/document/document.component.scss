@@ -1,0 +1,21 @@
+.element-panel {
+  width: 95px;
+  height: 110px;
+  margin: 0 15px 17px 0;
+  border: 3px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+
+  -webkit-transition: box-shadow 0.15s ease-in-out;
+  -moz-transition: box-shadow 0.15s ease-in-out;
+  -ms-transition: box-shadow 0.15s ease-in-out;
+  -o-transition: box-shadow 0.15s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
+
+  &:hover {
+    border: 3px solid rgba(0,0,0,0);
+    box-shadow: 0 6px 10px 3px rgba(0,0,0,.3);
+    cursor: pointer;
+  }
+}
+
