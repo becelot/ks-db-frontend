@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Filesystem} from '../../filesystem/filesystem';
+import {Folder} from '../../filesystem/folder';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class FilesystemService {
 
   private _currentPath: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor() { }
+  constructor() {
+    this._fileSystem.root.addDocument(new Folder('Angular'));
+  }
 
   get currentPath(): Observable<string[]> {
     return this._currentPath.asObservable();
