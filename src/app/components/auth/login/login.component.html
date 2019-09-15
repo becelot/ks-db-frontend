@@ -1,0 +1,41 @@
+<mat-card-header>
+  <mat-card-title>
+    <h3 style="display: flex; justify-content: flex-start;">
+      <mat-icon style="margin-right: 5px">vpn_key</mat-icon>
+      <span style="margin-left: 10px">Login</span>
+    </h3>
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <div style="margin: 10px 60px">
+    <form [formGroup]="loginForm" #form="ngForm" fxFlex="grow" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="center stretch" (ngSubmit)="login()">
+      <div fxFlex="0 0 auto" fxLayout="column" fxLayoutGap="15px">
+
+        <mat-form-field style="width: 100%">
+          <mat-icon matPrefix style="margin-right: 5px; margin-top: -5px">account_circle</mat-icon>
+          <input matInput type="text" placeholder="Username" required formControlName="username">
+          <mat-error *ngIf="loginForm.controls['username'].hasError('minlength')">
+            Username must have at least 4 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-icon matPrefix style="margin-right: 5px; margin-top: -5px">lock</mat-icon>
+          <input matInput type="password" placeholder="Password" required formControlName="password">
+          <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
+            Password must have at least 4 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="remember" value="false">Remember me?</mat-checkbox>
+
+        <button type="submit" style="display:none" [disabled]="loginForm.invalid">hidden submit</button>
+      </div>
+    </form>
+  </div>
+</mat-card-content>
+<mat-card-actions>
+  <div style="float: right; margin-right: 20px" matTooltip="Please enter valid data in the login form above" [matTooltipDisabled]="loginForm.valid">
+    <button mat-raised-button color="primary"  [disabled]="loginForm.invalid" (click)="login()">Login</button>
+  </div>
+</mat-card-actions>
