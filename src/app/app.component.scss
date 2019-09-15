@@ -1,18 +1,1 @@
 
-:host {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidenav-container {
-  flex: 1 0 0;
-
-  .sidenav-toolbar {
-    width: 300px;
-  }
-
-  .sidenav-content {
-    display: flex;
-  }
-}
