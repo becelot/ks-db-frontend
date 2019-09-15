@@ -1,0 +1,26 @@
+<main fxLayout="column" fxLayoutAlign="stretch center">
+  <div class="container" fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="25px">
+
+    <div class="header" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+<!--      <div fxFlex="85px">-->
+<!--        <img alt="EON Logo" src="assets/eon.png" width="81px">-->
+<!--      </div>-->
+      <div fxFlex="auto">
+        <h1 class="title">KS-DB</h1>
+        <h2 class="sub-title">Knowledge | Snippet | Database</h2>
+      </div>
+    </div>
+
+
+    <mat-card fxFlex="0 1 auto" [style.backgroundColor]="'#424242'">
+      <router-outlet></router-outlet>
+    </mat-card>
+
+    <div class="alert alert-danger" role="alert" fxFlex="0 1 auto">
+      <h4 class="alert-heading"><mat-icon style="line-height: 17px; width: 17px; height: 17px; font-size: 17px; margin-right: 5px">warning</mat-icon><span>Warning</span></h4>
+      The current version is an alpha version that provides limited functionality and may contain bugs. <br>
+      <br>
+    </div>
+
+  </div>
+</main>
