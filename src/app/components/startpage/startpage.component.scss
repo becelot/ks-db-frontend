@@ -1,0 +1,30 @@
+:host {
+  box-sizing: border-box;
+  position: relative;
+
+  flex: 1 0 0;
+  display: flex;
+}
+
+.startpage-container {
+  margin: 5px;
+  padding: 20px 10px 20px 20px;
+  position: relative;
+
+  flex: 1 0 0;
+  box-shadow: inset 0 0 10px 2px #303030;
+
+  display: flex;
+
+  .startpage {
+    flex: 1 0 0;
+
+    .startpage-header {
+      font-size: 32px;
+      color: #ff9b33;
+
+      padding-bottom: 3px;
+      border-bottom: 3px solid #c2185b;
+    }
+  }
+}
