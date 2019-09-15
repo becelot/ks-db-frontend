@@ -12,6 +12,7 @@ import { DocumentComponent } from './components/document/document.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+import {AmplifyAngularModule, AmplifyService} from 'aws-amplify-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -25,6 +26,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   imports: [
     BrowserModule,
+    AmplifyAngularModule,
     AppRoutingModule,
     AngularSvgIconModule,
     BrowserAnimationsModule,
@@ -38,7 +40,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    AmplifyService
   ],
   bootstrap: [AppComponent]
 })
