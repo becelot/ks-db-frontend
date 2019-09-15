@@ -13,6 +13,21 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {AmplifyAngularModule, AmplifyService} from 'aws-amplify-angular';
+import { StartpageComponent } from './components/startpage/startpage.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import {AuthorizationComponent} from './components/auth/authorization/authorization.component';
+import {
+  MatButtonModule,
+  MatCardModule, MatCheckboxModule,
+  MatDialog, MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatTooltipModule
+} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LayoutComponent } from './components/layout/layout.component';
+import { WarningDialogComponent } from './components/dialogs/warning-dialog/warning-dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -22,7 +37,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     AppComponent,
     FileViewerComponent,
-    DocumentComponent
+    DocumentComponent,
+    StartpageComponent,
+    LoginComponent,
+    AuthorizationComponent,
+    LayoutComponent,
+    WarningDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +54,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatToolbarModule,
     MatSidenavModule,
     PerfectScrollbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
@@ -42,6 +72,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     AmplifyService
+  ],
+  entryComponents: [
+    WarningDialogComponent
   ],
   bootstrap: [AppComponent]
 })
