@@ -1,0 +1,21 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-container {
+  flex: 1 0 0;
+
+  .sidenav-toolbar {
+    width: 300px;
+  }
+
+  .sidenav-content {
+    display: flex;
+  }
+}
+
+.login-button {
+  border: 2px solid rgba(255,255,255,.12);
+}

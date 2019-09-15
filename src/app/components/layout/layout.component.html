@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <div style="width: 100%">
+    KS-DB
+    <div style="float: right">
+      <ng-container *ngIf="signedIn">
+        {{ userName }}
+      </ng-container>
+      <ng-container *ngIf="!signedIn">
+        <button routerLink="/auth/login" mat-stroked-button class="login-button">Login</button>
+      </ng-container>
+    </div>
+  </div>
+
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [opened]="true" mode="side" position="start" class="sidenav-toolbar">
+    Content
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
