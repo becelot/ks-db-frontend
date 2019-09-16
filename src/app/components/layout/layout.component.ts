@@ -4,6 +4,8 @@ import {AuthState} from 'aws-amplify-angular/dist/src/providers';
 import {AuthClass} from 'aws-amplify';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../auth/login/login.component';
+import {AuthGuard} from '../auth/auth.guard';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ks-layout',
@@ -13,21 +15,13 @@ import {LoginComponent} from '../auth/login/login.component';
 export class LayoutComponent {
   title = 'ks-db-frontend';
 
-  public signedIn = false;
+  public signedIn: Observable<boolean>;
 
-  public userName: string;
+  public userName: Observable<string>;
 
-  constructor(private amplifyService: AmplifyService, private dialog: MatDialog ) {
-    amplifyService.authStateChange$.subscribe((state: AuthState) => {
-      if (state.state === 'signedIn') {
-        this.userName = state.user.username;
-        this.signedIn = true;
-      } else {
-        console.log(state.state);
-        this.userName = '';
-        this.signedIn = false;
-      }
-    });
+  constructor(private authGuard: AuthGuard, private amplifyService: AmplifyService, private dialog: MatDialog ) {
+    this.signedIn = authGuard.LoggedIn;
+    this.userName = authGuard.UserName;
   }
 
   public async  logout() {

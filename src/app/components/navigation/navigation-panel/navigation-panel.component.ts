@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AmplifyService} from 'aws-amplify-angular';
 import {AuthState} from 'aws-amplify-angular/dist/src/providers';
+import {AuthGuard} from '../../auth/auth.guard';
 
 @Component({
   selector: 'ks-navigation-panel',
@@ -11,10 +12,8 @@ export class NavigationPanelComponent implements OnInit {
 
   public loggedIn = false;
 
-  constructor(private amplifyService: AmplifyService) {
-    amplifyService.authStateChange$.subscribe((state: AuthState) => {
-      this.loggedIn = state.state === 'signedIn';
-    });
+  constructor(private authGuard: AuthGuard) {
+    authGuard.LoggedIn.subscribe((state: boolean) => this.loggedIn = state);
   }
 
   ngOnInit() {

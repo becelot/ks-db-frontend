@@ -5,6 +5,7 @@ import {StartpageComponent} from './components/startpage/startpage.component';
 import {AuthorizationComponent} from './components/auth/authorization/authorization.component';
 import {LoginComponent} from './components/auth/login/login.component';
 import {LayoutComponent} from './components/layout/layout.component';
+import {AuthGuard} from './components/auth/auth.guard';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
         component: StartpageComponent
       },
       { path: 'files',
+        canActivate: [AuthGuard],
         children: [ { path: '**', component: FileViewerComponent } ]
       }
     ]

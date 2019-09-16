@@ -2,7 +2,7 @@
   <div style="width: 100%">
     KS-DB
     <div style="float: right">
-      <ng-container *ngIf="signedIn">
+      <ng-container *ngIf="signedIn | async">
         <div fxLayout="row" fxLayoutAlign="center">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
@@ -10,10 +10,10 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>
-          <div style="line-height: 40px">{{ userName }}</div>
+          <div style="line-height: 40px">{{ userName | async }}</div>
         </div>
       </ng-container>
-      <ng-container *ngIf="!signedIn">
+      <ng-container *ngIf="!(signedIn | async)">
         <button (click)="login()" mat-stroked-button class="login-button">Login</button>
       </ng-container>
     </div>

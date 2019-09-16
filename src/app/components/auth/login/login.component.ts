@@ -5,6 +5,7 @@ import {AuthClass} from 'aws-amplify';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
 import {CognitoUser} from 'amazon-cognito-identity-js';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ks-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     remember: new FormControl('')
   });
 
-  constructor(private amplifyService: AmplifyService, private dialog: MatDialog, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
+  constructor(private amplifyService: AmplifyService, private dialog: MatDialog, private router: Router, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
     this.isDialog = !!dialogRef;
   }
 
@@ -53,6 +54,8 @@ export class LoginComponent implements OnInit {
 
           if (!!this.dialogRef) {
             this.dialogRef.close();
+          } else {
+            this.router.navigate(['/files'])
           }
         })
         .catch(err => {
