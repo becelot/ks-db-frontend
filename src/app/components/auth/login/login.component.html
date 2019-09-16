@@ -36,6 +36,7 @@
 </mat-card-content>
 <mat-card-actions>
   <div style="float: right; margin-right: 20px" matTooltip="Please enter valid data in the login form above" [matTooltipDisabled]="loginForm.valid">
+    <button mat-raised-button color="primary" style="margin-right: 20px" *ngIf="isDialog" [matDialogClose]="">Cancel</button>
     <button mat-raised-button color="primary"  [disabled]="loginForm.invalid || logginIn" (click)="login()">
       <div fxLayout="row" fxFlexAlign="center">
         <div style="padding: 5.5px 11px 5.5px 0" *ngIf="logginIn">
@@ -43,7 +44,6 @@
         </div>
         <span>Login</span>
       </div>
-
     </button>
   </div>
 </mat-card-actions>

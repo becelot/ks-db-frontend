@@ -14,6 +14,7 @@ import {CognitoUser} from 'amazon-cognito-identity-js';
 export class LoginComponent implements OnInit {
 
   public logginIn = false;
+  public isDialog: boolean;
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.minLength(4)]),
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private amplifyService: AmplifyService, private dialog: MatDialog, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
+    this.isDialog = !!dialogRef;
   }
 
   ngOnInit() {
