@@ -1,6 +1,6 @@
 <div fxLayout="column" class="navigation-panel-container">
   <ng-container [ngSwitch]="loggedIn">
-    <div *ngSwitchCase="true"><a routerLink="/files">FileSystem</a></div>
+    <div *ngSwitchCase="true"><a [routerLink]="'/files/' + (userName | async)">FileSystem</a></div>
     <p class="mat-body-strong" *ngSwitchCase="false">Please login to use the navigation panel!</p>
   </ng-container>
 </div>

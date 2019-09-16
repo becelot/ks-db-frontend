@@ -12,7 +12,7 @@ window['LOG_LEVEL'] = 'DEBUG';
 
 Amplify.configure({
   Auth: {
-    identityPoolId: 'us-east-1:cb8ae39d-b731-4148-a952-11108091852c',
+    // identityPoolId: 'us-east-1:cb8ae39d-b731-4148-a952-11108091852c',
 
     region: 'us-east-1',
 
@@ -26,9 +26,23 @@ Amplify.configure({
     mandatorySignIn: false,
 
     // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-    authenticationFlowType: 'USER_PASSWORD_AUTH',
+    authenticationFlowType: 'USER_SRP_AUTH',
+
+    authenticationType: 'AMAZON_COGNITO_USER_POOLS ',
 
     storage: rememberMe === 'true' ? localStorage : sessionStorage
+  },
+  API: {
+    endpoints: [
+      {
+        name: 'CloudEndpoint',
+        endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/'
+      },
+      {
+        name: 'LocalEndpoint',
+        endpoint: 'http://localhost:3000/'
+      }
+    ]
   }
 });
 
