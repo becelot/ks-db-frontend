@@ -29,13 +29,21 @@
 
         <mat-checkbox formControlName="remember" value="false">Remember me?</mat-checkbox>
 
-        <button type="submit" style="display:none" [disabled]="loginForm.invalid">hidden submit</button>
+        <button type="submit" style="display:none" [disabled]="loginForm.invalid || logginIn">hidden submit</button>
       </div>
     </form>
   </div>
 </mat-card-content>
 <mat-card-actions>
   <div style="float: right; margin-right: 20px" matTooltip="Please enter valid data in the login form above" [matTooltipDisabled]="loginForm.valid">
-    <button mat-raised-button color="primary"  [disabled]="loginForm.invalid" (click)="login()">Login</button>
+    <button mat-raised-button color="primary"  [disabled]="loginForm.invalid || logginIn" (click)="login()">
+      <div fxLayout="row" fxFlexAlign="center">
+        <div style="padding: 5.5px 11px 5.5px 0" *ngIf="logginIn">
+          <mat-progress-spinner color="primary" mode="indeterminate" diameter="25"></mat-progress-spinner>
+        </div>
+        <span>Login</span>
+      </div>
+
+    </button>
   </div>
 </mat-card-actions>

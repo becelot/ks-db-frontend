@@ -4,7 +4,7 @@ import {AmplifyService} from 'aws-amplify-angular';
 import {AuthClass} from 'aws-amplify';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
-import {CognitoUser} from "amazon-cognito-identity-js";
+import {CognitoUser} from 'amazon-cognito-identity-js';
 
 @Component({
   selector: 'ks-login',
@@ -12,6 +12,8 @@ import {CognitoUser} from "amazon-cognito-identity-js";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  public logginIn = false;
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.minLength(4)]),
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
     const auth: AuthClass = this.amplifyService.auth();
 
     if (this.loginForm.valid) {
-
+      this.logginIn = true;
       if (!!this.loginForm.controls['remember'].value) {
         localStorage.setItem('rememberMe', 'true');
         auth.configure({
@@ -45,6 +47,8 @@ export class LoginComponent implements OnInit {
 
       auth.signIn(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value)
         .then((session: CognitoUser) => {
+          this.logginIn = false;
+
           if (!!this.dialogRef) {
             this.dialogRef.close();
           }
@@ -56,6 +60,7 @@ export class LoginComponent implements OnInit {
               description: err.message
             }
           });
+          this.logginIn = false;
         });
     }
   }

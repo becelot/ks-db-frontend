@@ -22,7 +22,7 @@ import {
   MatDialog, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatMenuModule,
+  MatInputModule, MatMenuModule, MatProgressSpinnerModule,
   MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -64,6 +64,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule
   ],
