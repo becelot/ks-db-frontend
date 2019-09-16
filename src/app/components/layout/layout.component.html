@@ -3,10 +3,16 @@
     KS-DB
     <div style="float: right">
       <ng-container *ngIf="signedIn">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
         {{ userName }}
       </ng-container>
       <ng-container *ngIf="!signedIn">
-        <button routerLink="/auth/login" mat-stroked-button class="login-button">Login</button>
+        <button (click)="login()" mat-stroked-button class="login-button">Login</button>
       </ng-container>
     </div>
   </div>

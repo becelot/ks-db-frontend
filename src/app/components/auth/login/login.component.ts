@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AmplifyService} from 'aws-amplify-angular';
 import {AuthClass} from 'aws-amplify';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
 import {CognitoUser} from "amazon-cognito-identity-js";
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     remember: new FormControl('')
   });
 
-  constructor(private amplifyService: AmplifyService, private dialog: MatDialog) {
+  constructor(private amplifyService: AmplifyService, private dialog: MatDialog, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
   }
 
   ngOnInit() {
@@ -44,7 +44,11 @@ export class LoginComponent implements OnInit {
 
 
       auth.signIn(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value)
-        .then((session: CognitoUser) => {console.log(session); })
+        .then((session: CognitoUser) => {
+          if (!!this.dialogRef) {
+            this.dialogRef.close();
+          }
+        })
         .catch(err => {
           this.dialog.open(WarningDialogComponent, {
             width: '400px',

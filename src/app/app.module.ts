@@ -22,7 +22,7 @@ import {
   MatDialog, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatMenuModule,
   MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -62,6 +62,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatTooltipModule,
     MatButtonModule,
     MatDialogModule,
+    MatMenuModule,
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule
@@ -74,7 +75,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AmplifyService
   ],
   entryComponents: [
-    WarningDialogComponent
+    WarningDialogComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent]
 })
