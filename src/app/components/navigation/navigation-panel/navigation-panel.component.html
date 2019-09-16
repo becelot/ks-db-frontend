@@ -1,0 +1,6 @@
+<div fxLayout="column" class="navigation-panel-container">
+  <ng-container [ngSwitch]="loggedIn">
+    <div *ngSwitchCase="true">Logged in</div>
+    <p class="mat-body-strong" *ngSwitchCase="false">Please login to use the navigation panel!</p>
+  </ng-container>
+</div>

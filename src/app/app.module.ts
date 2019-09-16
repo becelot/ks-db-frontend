@@ -28,6 +28,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LayoutComponent } from './components/layout/layout.component';
 import { WarningDialogComponent } from './components/dialogs/warning-dialog/warning-dialog.component';
+import {NavigationModule} from './components/navigation/navigation.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,6 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   imports: [
     BrowserModule,
+    NavigationModule,
     AmplifyAngularModule,
     AppRoutingModule,
     AngularSvgIconModule,
