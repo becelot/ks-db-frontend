@@ -24,21 +24,24 @@ export class FileViewerComponent implements OnInit {
     console.log('test');
     const api: APIClass = this.amplifyService.api();
 
-    const user = await this.amplifyService.auth().currentAuthenticatedUser();
-    console.log(user.signInUserSession.idToken.jwtToken);
-    const result = await api.post('CloudEndpoint', 'files/create', {
-      headers: {
-        Authorization: user.signInUserSession.idToken.jwtToken
-      },
-      response: true,
-      body: {
-        documentName: 'Test',
-        type: 0,
-        date: 0
-      }
-    });
+    try {
+      const result = await api.post('CloudEndpoint', 'files/create', {
+        headers: {
+          // Authorization: user.signInUserSession.idToken.jwtToken
+        },
+        response: true,
+        body: {
+          documentName: 'Test',
+          type: 0,
+          date: 0
+        }
+      });
 
-    console.log(result);
+      console.log(result);
+    } catch (e) {
+
+    }
+
   }
 
 }
