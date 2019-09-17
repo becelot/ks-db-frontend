@@ -5,10 +5,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import Amplify from 'aws-amplify';
+import Amplify, {Auth} from 'aws-amplify';
 
 const rememberMe = localStorage.getItem('rememberMe');
-window['LOG_LEVEL'] = 'DEBUG';
+// window['LOG_LEVEL'] = 'DEBUG';
 
 Amplify.configure({
   Auth: {
@@ -28,15 +28,21 @@ Amplify.configure({
     // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
     authenticationFlowType: 'USER_SRP_AUTH',
 
-    authenticationType: 'AMAZON_COGNITO_USER_POOLS ',
-
     storage: rememberMe === 'true' ? localStorage : sessionStorage
   },
   API: {
     endpoints: [
       {
         name: 'CloudEndpoint',
-        endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/'
+        endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/',
+        custom_header: async () => {
+          try {
+            return { Authorization: (await Auth.currentAuthenticatedUser()).signInUserSession.idToken.jwtToken };
+          } catch (e) {
+
+          }
+          return {};
+        }
       },
       {
         name: 'LocalEndpoint',
@@ -45,6 +51,8 @@ Amplify.configure({
     ]
   }
 });
+
+
 
 if (environment.production) {
   enableProdMode();
