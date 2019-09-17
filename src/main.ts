@@ -46,7 +46,15 @@ Amplify.configure({
       },
       {
         name: 'LocalEndpoint',
-        endpoint: 'http://localhost:3000/'
+        endpoint: 'http://localhost:3000/',
+        custom_header: async () => {
+          try {
+            return { Authorization: (await Auth.currentAuthenticatedUser()).signInUserSession.idToken.jwtToken };
+          } catch (e) {
+
+          }
+          return {};
+        }
       }
     ]
   }
