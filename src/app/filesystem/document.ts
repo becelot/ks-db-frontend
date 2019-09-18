@@ -1,6 +1,7 @@
 
 
-export abstract class Document {
+export class Document {
+  private _loaded = false;
   private _name: string;
 
   constructor(name?: string) {
@@ -9,5 +10,9 @@ export abstract class Document {
 
   get name(): string {
     return this._name;
+  }
+
+  get loaded(): boolean {
+    return this._loaded;
   }
 }
