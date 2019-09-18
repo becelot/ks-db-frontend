@@ -48,6 +48,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.loggedIn.asObservable();
   }
 
+  public get LoggedInSync(): boolean {
+    return this.loggedIn.getValue();
+  }
+
   public get UserName(): Observable<string> {
     return this.userName.asObservable();
   }
