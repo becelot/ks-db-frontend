@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           if (!!this.dialogRef) {
             this.dialogRef.close();
           } else {
-            this.router.navigate(['/files'])
+            this.router.navigate(['/files']);
           }
         })
         .catch(err => {
