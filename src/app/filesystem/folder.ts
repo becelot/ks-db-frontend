@@ -20,4 +20,8 @@ export class Folder extends Document {
 
     return false;
   }
+
+  public getFile(name: string): Document {
+    return this._children.find(c => c.name === name);
+  }
 }
