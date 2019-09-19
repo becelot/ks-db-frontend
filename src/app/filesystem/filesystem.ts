@@ -9,7 +9,7 @@ export class Filesystem {
 
     let last: Folder = this.root;
     let current: Document = this.root;
-    for (const child in childs) {
+    for (const child of childs) {
       if (current instanceof Folder) {
         last = current;
         const tmp = current.getFile(child);
