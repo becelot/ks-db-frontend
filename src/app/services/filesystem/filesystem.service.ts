@@ -60,7 +60,7 @@ export class FilesystemService {
       }
     });
 
-    const doc = new Document(name, folder);
+    const doc = new Folder(name, folder);
     folder.addDocument(doc);
 
     return doc;
@@ -81,7 +81,7 @@ export class FilesystemService {
         });
 
         for (const d of response.data.documents) {
-          const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name) : new Document(d.name);
+          const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new Document(d.name, doc);
           doc.addDocument(dd);
         }
 
