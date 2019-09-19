@@ -31,11 +31,11 @@ export class FileViewerComponent implements OnInit {
   constructor(private filesystem: FilesystemService,
               private router: Router,
               private amplifyService: AmplifyService) {
-    /*this.router.events.subscribe((event) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updatePath();
       }
-    });*/
+    });
 
     this.updatePath();
   }
@@ -52,15 +52,26 @@ export class FileViewerComponent implements OnInit {
       path = path.slice(0, path.length - 1);
     }
 
-    const doc: Document = await this.filesystem.resolveDocument(path);
-    console.log(doc);
-    if (doc instanceof Folder) {
-      this.docs = [...doc.content];
+    try {
+      const doc: Document = await this.filesystem.resolveDocument(path);
+
+      if (doc instanceof Folder) {
+        this.docs = [...doc.content];
+      }
+    } catch (e) {
+
     }
+
 
   }
 
   ngOnInit() {
+  }
+
+  public openDocument(doc: Document) {
+    if (doc instanceof Folder) {
+      this.router.navigate([this.router.url + '/' + doc.name]);
+    }
   }
 
   public async createSomeDocument() {

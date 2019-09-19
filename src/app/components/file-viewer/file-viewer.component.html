@@ -9,7 +9,12 @@
   <perfect-scrollbar>
 
     <div class="file-content">
-      <ks-document *ngFor="let doc of docs" [name]="doc.name" icon="assets/angular.svg"></ks-document>
+      <ks-document
+        *ngFor="let doc of docs"
+        [name]="doc.name"
+        icon="assets/angular.svg"
+        (dblclick)="openDocument(doc)"
+      ></ks-document>
     </div>
   </perfect-scrollbar>
 </div>
