@@ -30,6 +30,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { WarningDialogComponent } from './components/dialogs/warning-dialog/warning-dialog.component';
 import {NavigationModule} from './components/navigation/navigation.module';
 import {AuthGuard} from './components/auth/auth.guard';
+import { InputDialogComponent } from './components/dialogs/input-dialog/input-dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -45,6 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthorizationComponent,
     LayoutComponent,
     WarningDialogComponent,
+    InputDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthGuard
   ],
   entryComponents: [
+    InputDialogComponent,
     WarningDialogComponent,
     LoginComponent
   ],
