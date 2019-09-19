@@ -6,6 +6,8 @@ import {APIClass} from 'aws-amplify';
 import {Doctype} from '@angular/compiler/src/i18n/serializers/xml_helper';
 import {Document} from '../../filesystem/document';
 import {Folder} from '../../filesystem/folder';
+import {MatDialog} from '@angular/material';
+import {InputDialogComponent} from '../dialogs/input-dialog/input-dialog.component';
 
 
 export enum DocType {
@@ -26,9 +28,10 @@ export interface IDocs {
 })
 export class FileViewerComponent implements OnInit {
 
-  public docs: Document[] = [];
+  public folder: Folder = undefined;
 
   constructor(private filesystem: FilesystemService,
+              private dialog: MatDialog,
               private router: Router,
               private amplifyService: AmplifyService) {
     this.router.events.subscribe((event) => {
@@ -56,7 +59,7 @@ export class FileViewerComponent implements OnInit {
       const doc: Document = await this.filesystem.resolveDocument(path);
 
       if (doc instanceof Folder) {
-        this.docs = [...doc.content];
+        this.folder = doc;
       }
     } catch (e) {
 
@@ -92,7 +95,41 @@ export class FileViewerComponent implements OnInit {
     } catch (e) {
 
     }
+  }
 
+  public async createFolder() {
+    const ref = this.dialog.open(InputDialogComponent, {
+      width: '300px',
+      data: {
+        title: 'Create new directory',
+        description: 'Directory name'
+      }
+    });
+
+    const result = await ref.afterClosed().toPromise();
+
+    // if a name was returned
+    if (!!result) {
+      await this.filesystem.createFolder(this.folder, result);
+      this.folder = this.folder;
+    }
+  }
+
+  public async createDocument() {
+    const ref = this.dialog.open(InputDialogComponent, {
+      width: '300px',
+      data: {
+        title: 'Create a new document',
+        description: 'Document name'
+      }
+    });
+
+    const result = await ref.afterClosed().toPromise();
+
+    // if a name was returned
+    if (!!result) {
+
+    }
   }
 
 }

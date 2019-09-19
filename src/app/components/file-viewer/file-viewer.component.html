@@ -1,6 +1,7 @@
 <div style="margin: 0 5px">
   <mat-toolbar style="height: 40px; padding: 0 5px 0 5px" color="accent">
-    <button mat-raised-button color="primary" (click)="createSomeDocument()">Create some file</button>
+    <button mat-raised-button color="primary" (click)="createFolder()">Create Folder</button>
+    <button mat-raised-button color="primary" (click)="createDocument()">Create Document</button>
   </mat-toolbar>
 </div>
 
@@ -10,7 +11,7 @@
 
     <div class="file-content">
       <ks-document
-        *ngFor="let doc of docs"
+        *ngFor="let doc of folder.content"
         [name]="doc.name"
         icon="assets/angular.svg"
         (dblclick)="openDocument(doc)"
