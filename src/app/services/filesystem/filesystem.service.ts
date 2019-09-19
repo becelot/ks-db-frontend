@@ -47,10 +47,10 @@ export class FilesystemService {
   }
 
   public async resolveDocument(path: string): Promise<Document> {
-
     const doc: Document = this._fileSystem.resolveOrCreateDocument(path);
 
     if (!doc.loaded) {
+      doc.markLoaded();
       if (doc instanceof Folder) {
         const api: APIClass = this.amplifyService.api();
         const response = await api.post('LocalEndpoint', 'files/list', {
@@ -64,12 +64,13 @@ export class FilesystemService {
           const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name) : new Document(d.name);
           doc.addDocument(dd);
         }
+
+
       } else {
 
       }
     }
 
-    console.log(doc);
     return doc;
   }
 }
