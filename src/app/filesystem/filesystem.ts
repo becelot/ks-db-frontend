@@ -17,7 +17,7 @@ export class Filesystem {
         if (!!tmp) {
           current = tmp;
         } else {
-          current = new Folder(child);
+          current = new Folder(child, last);
           last.addDocument(current);
         }
       } else {
