@@ -15,4 +15,8 @@ export class Document {
   get loaded(): boolean {
     return this._loaded;
   }
+
+  public markLoaded(): void {
+    this._loaded = true;
+  }
 }
