@@ -6,6 +6,8 @@
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 
+  user-select: none;
+
   -webkit-transition: box-shadow 0.15s ease-in-out;
   -moz-transition: box-shadow 0.15s ease-in-out;
   -ms-transition: box-shadow 0.15s ease-in-out;
