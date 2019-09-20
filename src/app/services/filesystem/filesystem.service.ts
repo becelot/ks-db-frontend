@@ -69,9 +69,14 @@ export class FilesystemService {
   public async resolveDocument(path: string): Promise<Document> {
     const doc: Document = this._fileSystem.resolveOrCreateDocument(path);
 
+    // if document is not cached
     if (!doc.loaded) {
       doc.markLoaded();
+
+      // if it is a folder
       if (doc instanceof Folder) {
+
+        // retrieve the contents of the folder
         const api: APIClass = this.amplifyService.api();
         const response = await api.post('LocalEndpoint', 'files/list', {
           response: true,
@@ -80,17 +85,13 @@ export class FilesystemService {
           }
         });
 
+        // add all contained documents to the virtual filesystem
         for (const d of response.data.documents) {
           if (!doc.containsFile(d.name)) {
             const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new Document(d.name, doc);
             doc.addDocument(dd);
           }
-
         }
-
-
-      } else {
-
       }
     }
 
