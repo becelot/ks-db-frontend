@@ -34,6 +34,7 @@ interface DocumentViewModel {
 export class FileViewerComponent implements OnInit {
 
   private _folder: Folder = undefined;
+
   public documents: DocumentViewModel[] = [];
 
   constructor(private filesystem: FilesystemService,
@@ -61,6 +62,8 @@ export class FileViewerComponent implements OnInit {
       path = path.slice(0, path.length - 1);
     }
 
+    console.log(`Resolve path: ${path}`);
+
     try {
       const doc: Document = await this.filesystem.resolveDocument(path);
 
@@ -75,6 +78,16 @@ export class FileViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public selectDocument(doc: DocumentViewModel, event: MouseEvent) {
+    console.log(this._folder);
+    if (event.ctrlKey) {
+      doc.selected = true;
+    }  else {
+      this.documents.forEach(d => d.selected = false);
+      doc.selected = true;
+    }
   }
 
   public openDocument(doc: Document) {

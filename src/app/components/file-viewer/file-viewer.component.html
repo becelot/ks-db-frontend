@@ -15,6 +15,7 @@
         [name]="model.doc.name"
         [selected]="model.selected"
         icon="assets/angular.svg"
+        (click)="selectDocument(model, $event)"
         (dblclick)="openDocument(model.doc)"
       ></ks-document>
     </div>
