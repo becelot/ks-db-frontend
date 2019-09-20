@@ -24,4 +24,8 @@ export class Folder extends Document {
   public getFile(name: string): Document {
     return this._children.find(c => c.name === name);
   }
+
+  public containsFile(name: string): boolean {
+    return this._children.find(c => c.name === name) !== undefined;
+  }
 }
