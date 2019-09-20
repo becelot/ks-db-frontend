@@ -68,9 +68,13 @@ export class Filesystem {
   public resolveOrTouch(path: string): TextDocument {
     const childs: string[] = path.split('/');
 
+    if (!childs[childs.length - 1]) {
+      throw new Error('Document name is invalid');
+    }
+
     let last: Folder = this.root;
     let current: Document = this.root;
-    for (const child of childs) {
+    for (const child of childs.slice(0, childs.length - 1)) {
       if (current instanceof Folder) {
         last = current;
         const tmp = current.getFile(child);
@@ -78,7 +82,7 @@ export class Filesystem {
         if (!!tmp) {
           current = tmp;
         } else {
-          current = new TextDocument(child, last);
+          current = new Folder(child, last);
           last.addDocument(current);
         }
       } else {
@@ -86,10 +90,8 @@ export class Filesystem {
       }
     }
 
-    if (!(current instanceof TextDocument)) {
-      throw new Error('Path cannot be created. The path contains a document name!');
-    }
 
-    return current;
+
+    return new TextDocument(childs[childs.length - 1], last);
   }
 }
