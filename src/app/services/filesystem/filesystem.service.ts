@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {AuthGuard} from '../../components/auth/auth.guard';
 import {AmplifyService} from 'aws-amplify-angular';
 import {APIClass} from 'aws-amplify';
+import {TextDocument} from '../../filesystem/TextDocument';
 
 export enum DocType {
   DOC_FOLDER,
@@ -20,6 +21,27 @@ interface IListDocumentsResp {
     type: DocType;
   }>;
   error?: string;
+}
+
+interface IGetDocumentResp {
+  successful: boolean;
+  type?: DocType;
+  error?: string;
+}
+
+interface IGetDocumentFolderResponse extends IGetDocumentResp {
+  documents: Array<{
+    name: string;
+    type: DocType;
+  }>;
+}
+
+interface IGetDocumentTextResponse extends IGetDocumentResp {
+  content: string;
+}
+
+interface IGetDocumentResponse {
+  data: IGetDocumentFolderResponse | IGetDocumentTextResponse;
 }
 
 @Injectable({
@@ -87,30 +109,49 @@ export class FilesystemService {
   }
 
   public async resolveDocument(path: string): Promise<Document> {
-    const doc: Document = this._fileSystem.resolveOrCreateDocument(path);
+    const api: APIClass = this.amplifyService.api();
+    let doc: Document = this._fileSystem.resolveOrFail(path);
 
-    // if document is not cached
-    if (!doc.loaded) {
-      doc.markLoaded();
-
-      // if it is a folder
-      if (doc instanceof Folder) {
-
-        // retrieve the contents of the folder
-        const api: APIClass = this.amplifyService.api();
-        const response = await api.post('LocalEndpoint', 'files/list', {
+    // if the document was not yet created, retrieve it from the server
+    if (doc === undefined || !doc.loaded) {
+      // try to resolve from backend
+      let result: IGetDocumentResponse;
+      try {
+        result = await api.post('LocalEndpoint', 'files/content', {
           response: true,
           body: {
-            folder: path
+            path
           }
         });
+      } catch (e) {
+        throw new Error(`Error: Could not resolve path`);
+      }
 
-        // add all contained documents to the virtual filesystem
-        for (const d of response.data.documents) {
-          if (!doc.containsFile(d.name)) {
-            const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new Document(d.name, doc);
-            doc.addDocument(dd);
+      if (!result.data.successful) {
+        throw new Error(result.data.error);
+      }
+
+      // if the document was a folder
+      if (result.data.type === DocType.DOC_FOLDER) {
+        doc = this._fileSystem.resolveOrMkDir(path);
+        doc.markLoaded();
+        if (doc instanceof Folder) {
+          const response: IGetDocumentFolderResponse = result.data as IGetDocumentFolderResponse;
+
+          // add all contained documents to the virtual filesystem
+          for (const d of response.documents) {
+            if (!doc.containsFile(d.name)) {
+              const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new TextDocument(d.name, doc);
+              doc.addDocument(dd);
+            }
           }
+        }
+      } else if (result.data.type === DocType.DOC_FILE) {
+        doc = this._fileSystem.resolveOrTouch(path);
+        doc.markLoaded();
+        if (doc instanceof TextDocument) {
+          const response: IGetDocumentTextResponse = result.data as IGetDocumentTextResponse;
+          doc.content = response.content;
         }
       }
     }
