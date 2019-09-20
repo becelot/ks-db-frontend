@@ -12,6 +12,9 @@ export class DocumentComponent implements OnInit {
   @Input()
   public name = '';
 
+  @Input()
+  public selected = false;
+
   constructor() { }
 
   ngOnInit() {
