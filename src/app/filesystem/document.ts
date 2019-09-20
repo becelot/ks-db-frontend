@@ -5,10 +5,12 @@ export class Document {
   private _loaded = false;
   private _name: string;
   private _parent: Folder;
+  private _icon: string;
 
   constructor(name?: string, parent?: Folder) {
     this._name = name;
     this._parent = parent;
+    this.icon = 'document.svg';
   }
 
   get name(): string {
@@ -29,5 +31,13 @@ export class Document {
     } else {
       return this._name;
     }
+  }
+
+  get icon(): string {
+    return this._icon;
+  }
+
+  set icon(value: string) {
+    this._icon = value;
   }
 }

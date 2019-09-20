@@ -3,6 +3,11 @@ import {Document} from './document';
 export class Folder extends Document {
   private _children: Document[] = [];
 
+  constructor(name?: string, parent?: Folder) {
+    super(name, parent);
+    this.icon = 'folder.svg';
+  }
+
   public get content(): Document[] {
     return [...this._children];
   }

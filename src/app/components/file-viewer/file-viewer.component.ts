@@ -147,7 +147,8 @@ export class FileViewerComponent implements OnInit {
 
     // if a name was returned
     if (!!result) {
-
+      await this.filesystem.createDocument(this._folder, result);
+      this.folder = this._folder;
     }
   }
 

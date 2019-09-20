@@ -14,7 +14,7 @@
         *ngFor="let model of documents"
         [name]="model.doc.name"
         [selected]="model.selected"
-        icon="assets/angular.svg"
+        [icon]="'assets/' + model.doc.icon"
         (click)="selectDocument(model, $event)"
         (dblclick)="openDocument(model.doc)"
       ></ks-document>
