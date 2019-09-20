@@ -66,6 +66,26 @@ export class FilesystemService {
     return doc;
   }
 
+  public async createDocument(folder: Folder, name: string): Promise<Document> {
+    const path = folder.Path;
+
+    const api: APIClass = this.amplifyService.api();
+    const response = await api.post('LocalEndpoint', 'files/create', {
+      response: true,
+      body: {
+        documentName: name,
+        parentFolder: path,
+        type: 1,
+        date: 0
+      }
+    });
+
+    const doc = new Document(name, folder);
+    folder.addDocument(doc);
+
+    return doc;
+  }
+
   public async resolveDocument(path: string): Promise<Document> {
     const doc: Document = this._fileSystem.resolveOrCreateDocument(path);
 
