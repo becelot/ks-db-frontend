@@ -21,6 +21,11 @@ export interface IDocs {
   type: DocType;
 }
 
+interface DocumentViewModel {
+  doc: Document;
+  selected: boolean;
+}
+
 @Component({
   selector: 'ks-file-viewer',
   templateUrl: './file-viewer.component.html',
@@ -28,7 +33,8 @@ export interface IDocs {
 })
 export class FileViewerComponent implements OnInit {
 
-  public folder: Folder = undefined;
+  private _folder: Folder = undefined;
+  public documents: DocumentViewModel[] = [];
 
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
@@ -110,8 +116,8 @@ export class FileViewerComponent implements OnInit {
 
     // if a name was returned
     if (!!result) {
-      await this.filesystem.createFolder(this.folder, result);
-      this.folder = this.folder;
+      await this.filesystem.createFolder(this._folder, result);
+      this.folder = this._folder;
     }
   }
 
@@ -130,6 +136,11 @@ export class FileViewerComponent implements OnInit {
     if (!!result) {
 
     }
+  }
+
+  set folder(folder: Folder) {
+    this._folder = folder;
+    this.documents = folder.content.map(doc => ({doc, selected: false}));
   }
 
 }

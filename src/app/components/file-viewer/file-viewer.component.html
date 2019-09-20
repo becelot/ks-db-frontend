@@ -11,10 +11,10 @@
 
     <div class="file-content">
       <ks-document
-        *ngFor="let doc of folder.content"
-        [name]="doc.name"
+        *ngFor="let model of documents"
+        [name]="model.doc.name"
         icon="assets/angular.svg"
-        (dblclick)="openDocument(doc)"
+        (dblclick)="openDocument(model.doc)"
       ></ks-document>
     </div>
   </perfect-scrollbar>
