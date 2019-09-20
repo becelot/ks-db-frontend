@@ -81,8 +81,11 @@ export class FilesystemService {
         });
 
         for (const d of response.data.documents) {
-          const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new Document(d.name, doc);
-          doc.addDocument(dd);
+          if (!doc.containsFile(d.name)) {
+            const dd = d.type === DocType.DOC_FOLDER ? new Folder(d.name, doc) : new Document(d.name, doc);
+            doc.addDocument(dd);
+          }
+
         }
 
 
