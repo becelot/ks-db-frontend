@@ -8,6 +8,7 @@ import {Document} from '../../filesystem/document';
 import {Folder} from '../../filesystem/folder';
 import {MatDialog} from '@angular/material';
 import {InputDialogComponent} from '../dialogs/input-dialog/input-dialog.component';
+import {TextDocument} from '../../filesystem/TextDocument';
 
 
 export enum DocType {
@@ -26,6 +27,11 @@ interface DocumentViewModel {
   selected: boolean;
 }
 
+export enum ViewMode {
+  FOLDER_VIEW,
+  TEXT_VIEW
+}
+
 @Component({
   selector: 'ks-file-viewer',
   templateUrl: './file-viewer.component.html',
@@ -33,9 +39,14 @@ interface DocumentViewModel {
 })
 export class FileViewerComponent implements OnInit {
 
-  private _folder: Folder = undefined;
+  public viewMode: ViewMode = ViewMode.FOLDER_VIEW;
 
+  // Folder view
+  private _folder: Folder = undefined;
   public documents: DocumentViewModel[] = [];
+
+  // Content view
+  private content: string;
 
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
@@ -62,16 +73,19 @@ export class FileViewerComponent implements OnInit {
       path = path.slice(0, path.length - 1);
     }
 
-    console.log(`Resolve path: ${path}`);
-
     try {
       const doc: Document = await this.filesystem.resolveDocument(path);
 
       if (doc instanceof Folder) {
         this.folder = doc;
+        this.viewMode = ViewMode.FOLDER_VIEW;
+      } else if (doc instanceof TextDocument) {
+        this.content = doc.content;
+        this.viewMode = ViewMode.TEXT_VIEW;
+        console.log(this.viewMode);
       }
     } catch (e) {
-
+      console.log(e);
     }
 
 
@@ -81,7 +95,6 @@ export class FileViewerComponent implements OnInit {
   }
 
   public selectDocument(doc: DocumentViewModel, event: MouseEvent) {
-    console.log(this._folder);
     if (event.ctrlKey) {
       doc.selected = true;
     }  else {
@@ -91,9 +104,8 @@ export class FileViewerComponent implements OnInit {
   }
 
   public openDocument(doc: Document) {
-    if (doc instanceof Folder) {
-      this.router.navigate([this.router.url + '/' + doc.name]);
-    }
+    // navigate to new route
+    this.router.navigate([this.router.url + '/' + doc.name]);
   }
 
   public async createSomeDocument() {

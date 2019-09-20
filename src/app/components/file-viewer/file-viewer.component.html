@@ -10,14 +10,23 @@
   <perfect-scrollbar>
 
     <div class="file-content">
-      <ks-document
-        *ngFor="let model of documents"
-        [name]="model.doc.name"
-        [selected]="model.selected"
-        [icon]="'assets/' + model.doc.icon"
-        (click)="selectDocument(model, $event)"
-        (dblclick)="openDocument(model.doc)"
-      ></ks-document>
+      <ng-container [ngSwitch]="viewMode">
+        <ng-container *ngSwitchCase="0">
+          <ks-document
+            *ngFor="let model of documents"
+            [name]="model.doc.name"
+            [selected]="model.selected"
+            [icon]="'assets/' + model.doc.icon"
+            (click)="selectDocument(model, $event)"
+            (dblclick)="openDocument(model.doc)"
+          ></ks-document>
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+          {{ !!content ? content : 'No content'}}
+        </ng-container>
+
+      </ng-container>
+
     </div>
   </perfect-scrollbar>
 </div>
