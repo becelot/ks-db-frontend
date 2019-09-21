@@ -90,8 +90,25 @@ export class Filesystem {
       }
     }
 
+    const targetName = childs[childs.length - 1];
+    if (current instanceof Folder) {
+      last = current;
+      const tmp = current.getFile(targetName);
 
+      if (!!tmp) {
+        current = tmp;
+      } else {
+        current = new TextDocument(targetName, last);
+        last.addDocument(current);
+      }
+    } else {
+      throw new Error('Path cannot be created. The path contains a document name!');
+    }
 
-    return new TextDocument(childs[childs.length - 1], last);
+    if (current instanceof TextDocument) {
+      return current;
+    } else {
+      throw new Error('Path cannot be created. The path references a directory!');
+    }
   }
 }
