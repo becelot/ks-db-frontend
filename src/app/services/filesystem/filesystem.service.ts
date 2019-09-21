@@ -108,6 +108,21 @@ export class FilesystemService {
     return doc;
   }
 
+  public async syncDocument(doc: TextDocument): Promise<TextDocument> {
+    const api: APIClass = this.amplifyService.api();
+    const path = doc.Path;
+
+    const response = await api.post('LocalEndpoint', 'files/update', {
+      response: true,
+      body: {
+        path: doc.Path,
+        content: doc.content
+      }
+    });
+
+    return doc;
+  }
+
   public async resolveDocument(path: string): Promise<Document> {
     const api: APIClass = this.amplifyService.api();
     let doc: Document = this._fileSystem.resolveOrFail(path);

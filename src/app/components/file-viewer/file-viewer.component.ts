@@ -159,9 +159,12 @@ export class FileViewerComponent implements OnInit {
     this.documents = folder.content.map(doc => ({doc, selected: false}));
   }
 
-  public saveDocument() {
+  public async saveDocument() {
     this.content = this.editContent;
     this.textDoc.content = this.editContent;
+
+    await this.filesystem.syncDocument(this.textDoc);
+
     this.viewMode = ViewMode.TEXT_VIEW;
   }
 
