@@ -29,7 +29,8 @@ interface DocumentViewModel {
 
 export enum ViewMode {
   FOLDER_VIEW,
-  TEXT_VIEW
+  TEXT_VIEW,
+  TEXT_EDIT_VIEW
 }
 
 @Component({
@@ -47,6 +48,9 @@ export class FileViewerComponent implements OnInit {
 
   // Content view
   private content: string;
+
+  // Edit view content
+  private editContent: string;
 
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
@@ -82,7 +86,6 @@ export class FileViewerComponent implements OnInit {
       } else if (doc instanceof TextDocument) {
         this.content = doc.content;
         this.viewMode = ViewMode.TEXT_VIEW;
-        console.log(this.viewMode);
       }
     } catch (e) {
       console.log(e);
@@ -108,24 +111,9 @@ export class FileViewerComponent implements OnInit {
     this.router.navigate([this.router.url + '/' + doc.name]);
   }
 
-  public async createSomeDocument() {
-    const api: APIClass = this.amplifyService.api();
-
-    try {
-      const result = await api.post('LocalEndpoint', 'files/create', {
-        headers: {
-          // Authorization: user.signInUserSession.idToken.jwtToken
-        },
-        response: true,
-        body: {
-          documentName: 'Test',
-          type: 0,
-          date: 0
-        }
-      });
-    } catch (e) {
-
-    }
+  public editDocument() {
+    this.viewMode = ViewMode.TEXT_EDIT_VIEW;
+    this.editContent = this.content;
   }
 
   public async createFolder() {
