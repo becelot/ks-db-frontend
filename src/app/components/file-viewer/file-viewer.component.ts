@@ -47,6 +47,7 @@ export class FileViewerComponent implements OnInit {
   public documents: DocumentViewModel[] = [];
 
   // Content view
+  private textDoc: TextDocument;
   private content: string;
 
   // Edit view content
@@ -85,6 +86,7 @@ export class FileViewerComponent implements OnInit {
         this.viewMode = ViewMode.FOLDER_VIEW;
       } else if (doc instanceof TextDocument) {
         this.content = doc.content;
+        this.textDoc = doc;
         this.viewMode = ViewMode.TEXT_VIEW;
       }
     } catch (e) {
@@ -155,6 +157,17 @@ export class FileViewerComponent implements OnInit {
   set folder(folder: Folder) {
     this._folder = folder;
     this.documents = folder.content.map(doc => ({doc, selected: false}));
+  }
+
+  public saveDocument() {
+    this.content = this.editContent;
+    this.textDoc.content = this.editContent;
+    this.viewMode = ViewMode.TEXT_VIEW;
+  }
+
+  public dismissChanges() {
+    this.editContent = '';
+    this.viewMode = ViewMode.TEXT_VIEW;
   }
 
 }
