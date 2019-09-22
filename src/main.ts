@@ -47,6 +47,7 @@ Amplify.configure({
       {
         name: 'LocalEndpoint',
         endpoint: 'http://localhost:3000/',
+        // endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/',
         custom_header: async () => {
           try {
             return { Authorization: (await Auth.currentAuthenticatedUser()).signInUserSession.idToken.jwtToken };
