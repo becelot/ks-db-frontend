@@ -42,6 +42,11 @@ export class Filesystem {
    * @param path The path to be resolved
    */
   public resolveOrMkDir(path: string): Folder {
+    // root folder case
+    if (path === '') {
+      return this.root;
+    }
+
     const childs: string[] = path.split('/');
 
     let last: Folder = this.root;

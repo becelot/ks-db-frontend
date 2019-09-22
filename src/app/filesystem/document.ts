@@ -29,7 +29,7 @@ export class Document {
     if (!!this._parent) {
       return `${this._parent.Path}/${this._name}`;
     } else {
-      return this._name;
+      return '';
     }
   }
 
