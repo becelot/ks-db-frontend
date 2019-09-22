@@ -53,7 +53,6 @@ export class FilesystemService {
   private _currentPath: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   constructor(private router: Router, private auth: AuthGuard, private amplifyService: AmplifyService) {
-    this._fileSystem.root.addDocument(new Folder('Angular'));
   }
 
 
@@ -70,7 +69,7 @@ export class FilesystemService {
 
   public async createFolder(folder: Folder, name: string): Promise<Document> {
     const path = folder.Path;
-
+    console.log(folder);
     const api: APIClass = this.amplifyService.api();
     const response = await api.post('LocalEndpoint', 'files/create', {
       response: true,
@@ -135,7 +134,7 @@ export class FilesystemService {
         result = await api.post('LocalEndpoint', 'files/content', {
           response: true,
           body: {
-            path
+            path: !!doc ? doc.Path : ''
           }
         });
       } catch (e) {
