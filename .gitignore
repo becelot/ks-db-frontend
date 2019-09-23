@@ -46,7 +46,7 @@ testem.log
 Thumbs.db
 
 .firebaserc
-
+.firebase
 
 # Created by https://www.gitignore.io/api/visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudiocode
