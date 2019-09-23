@@ -123,9 +123,10 @@ export class FilesystemService {
   }
 
   public async resolveDocument(path: string): Promise<Document> {
+    console.log(path);
     const api: APIClass = this.amplifyService.api();
     let doc: Document = this._fileSystem.resolveOrFail(path);
-
+    console.log(doc);
     // if the document was not yet created, retrieve it from the server
     if (doc === undefined || !doc.loaded) {
       // try to resolve from backend
@@ -134,7 +135,7 @@ export class FilesystemService {
         result = await api.post('LocalEndpoint', 'files/content', {
           response: true,
           body: {
-            path: !!doc ? doc.Path : ''
+            path: !!doc ? doc.Path : (path !== '' ? `/${path}` : '')
           }
         });
       } catch (e) {
