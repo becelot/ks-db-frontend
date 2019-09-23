@@ -173,4 +173,14 @@ export class FileViewerComponent implements OnInit {
     this.viewMode = ViewMode.TEXT_VIEW;
   }
 
+  public async deleteSelectedDocuments(): Promise<void> {
+    const documents: Document[] = this.documents.filter(doc => doc.selected).map(doc => doc.doc);
+
+    for (const doc of documents) {
+      await this.filesystem.deleteDocument(doc);
+    }
+
+    this.folder = this._folder;
+  }
+
 }

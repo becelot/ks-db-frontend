@@ -172,4 +172,24 @@ export class FilesystemService {
 
     return doc;
   }
+
+  public async deleteDocument(doc: Document): Promise<void> {
+    const api: APIClass = this.amplifyService.api();
+    const path: string = doc.Path;
+
+    // try to delete the resource
+    try {
+      await api.post('LocalEndpoint', 'files/delete', {
+        response: true,
+        body: {
+          path
+        }
+      });
+    } catch (e) {
+      throw new Error('Remote file could not be deleted: ' + e.message);
+    }
+
+    // if the resource was deleted successfully, remove it locally
+    doc.parent.deleteDocument(doc);
+  }
 }

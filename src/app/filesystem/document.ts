@@ -21,6 +21,10 @@ export class Document {
     return this._loaded;
   }
 
+  get parent(): Folder {
+    return this._parent;
+  }
+
   public markLoaded(): void {
     this._loaded = true;
   }
