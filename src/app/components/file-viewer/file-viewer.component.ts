@@ -30,7 +30,8 @@ interface DocumentViewModel {
 export enum ViewMode {
   FOLDER_VIEW,
   TEXT_VIEW,
-  TEXT_EDIT_VIEW
+  TEXT_EDIT_VIEW,
+  ERROR_VIEW
 }
 
 @Component({
@@ -53,24 +54,29 @@ export class FileViewerComponent implements OnInit {
   // Edit view content
   private editContent: string;
 
+  // Error view
+  public error: string;
+  public parentFolder: string;
+
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
               private router: Router,
               private amplifyService: AmplifyService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.updatePath();
+        this.updatePath(event.url);
       }
     });
 
-    this.updatePath();
+    this.updatePath(this.router.url);
   }
 
-  private async updatePath() {
-    if (!this.router.url.startsWith('/files')) {
+  private async updatePath(url: string) {
+    if (!url.startsWith('/files')) {
       return;
     }
-    let path: string = this.router.url.replace('/files', '');
+
+    let path: string = url.replace('/files', '');
 
     // Slice pre and post slashes of path
     if (path[0] === '/') {
@@ -93,7 +99,9 @@ export class FileViewerComponent implements OnInit {
         this.viewMode = ViewMode.TEXT_VIEW;
       }
     } catch (e) {
-      console.log(e);
+      this.error = 'The document does not exist';
+      this.parentFolder = this.getPathInfo(url)[0];
+      this.viewMode = ViewMode.ERROR_VIEW;
     }
 
 
@@ -185,5 +193,21 @@ export class FileViewerComponent implements OnInit {
 
     this.folder = this._folder;
   }
+
+  /**
+   * Extracts the parent folder from a given string
+   * @param path
+   */
+  private getPathInfo(path: string): [string, string] {
+    const index: number = path.lastIndexOf('/');
+
+    // if the path contains a '/'
+    if (index < 0) {
+      throw new Error('Ill-formed path');
+    }
+
+    return [path.slice(0, index), path.slice(index + 1, path.length)];
+  }
+
 
 }
