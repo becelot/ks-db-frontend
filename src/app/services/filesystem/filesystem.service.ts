@@ -101,7 +101,7 @@ export class FilesystemService {
       }
     });
 
-    const doc = new Document(name, folder);
+    const doc = new TextDocument(name, folder);
     folder.addDocument(doc);
 
     return doc;
