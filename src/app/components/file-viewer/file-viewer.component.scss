@@ -25,6 +25,11 @@
   width: 100%;
   display: flex;
   flex-flow: row wrap;
+}
 
+:host::ng-deep h1 {
+  font-size: 32px;
 
+  padding-bottom: 3px;
+  border-bottom: 3px solid #c2185b;
 }

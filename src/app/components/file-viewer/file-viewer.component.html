@@ -35,10 +35,22 @@
                   ></ks-document>
                 </div>
               </perfect-scrollbar>
+
             </ng-container>
 
         <ng-container *ngSwitchCase="1">
-          {{ !!content ? content : 'No content'}}
+          <ng-container *ngIf="!content">No Content</ng-container>
+          <ng-container *ngIf="!!content">
+            <div style="height: 100%; width: 100%;">
+              <perfect-scrollbar>
+                <div class="file-content">
+                  <showdown [value]="content" style="width: 100%"></showdown>
+                </div>
+              </perfect-scrollbar>
+            </div>
+
+          </ng-container>
+
         </ng-container>
         <ng-container *ngSwitchCase="2">
           <textarea style="width: 100%; height: 100%" matInput mat-autosize="false" [(ngModel)]="editContent"></textarea>

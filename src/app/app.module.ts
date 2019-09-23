@@ -31,9 +31,19 @@ import { WarningDialogComponent } from './components/dialogs/warning-dialog/warn
 import {NavigationModule} from './components/navigation/navigation.module';
 import {AuthGuard} from './components/auth/auth.guard';
 import { InputDialogComponent } from './components/dialogs/input-dialog/input-dialog.component';
+import {ShowdownModule} from 'ngx-showdown';
+
+import * as highlightExtension from 'showdown-highlight';
+import * as Showdown from 'showdown';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
+};
+
+const mdToSdExtension: Showdown.RegexReplaceExtension = {
+  type: 'lang',
+  regex: new RegExp('`Markdown`', 'g'),
+  replace: '<button mat-icon-button><mat-icon>folder</mat-icon></button>'
 };
 
 @NgModule({
@@ -52,6 +62,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserModule,
     NavigationModule,
     AmplifyAngularModule,
+    ShowdownModule.forRoot({
+      extensions: [highlightExtension, mdToSdExtension]
+    }),
     AppRoutingModule,
     AngularSvgIconModule,
     BrowserAnimationsModule,
