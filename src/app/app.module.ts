@@ -35,6 +35,7 @@ import {ShowdownModule} from 'ngx-showdown';
 
 import * as highlightExtension from 'showdown-highlight';
 import * as Showdown from 'showdown';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -84,7 +85,8 @@ const mdToSdExtension: Showdown.RegexReplaceExtension = {
     MatCheckboxModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [
     {

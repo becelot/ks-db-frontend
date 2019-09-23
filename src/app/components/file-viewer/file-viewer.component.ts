@@ -53,6 +53,7 @@ export class FileViewerComponent implements OnInit {
 
   // Edit view content
   private editContent: string;
+  public editorOptions = {theme: 'vs', language: 'markdown'};
 
   // Error view
   public error: string;
