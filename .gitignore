@@ -45,6 +45,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.firebaserc
+
 
 # Created by https://www.gitignore.io/api/visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudiocode
