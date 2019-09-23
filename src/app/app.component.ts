@@ -16,6 +16,7 @@ export class AppComponent {
     icons.addSvgIcon('add_doc', domSanitizer.bypassSecurityTrustResourceUrl('assets/newdoc.svg'));
     icons.addSvgIcon('add_folder', domSanitizer.bypassSecurityTrustResourceUrl('assets/newfolder.svg'));
     icons.addSvgIcon('edit_doc', domSanitizer.bypassSecurityTrustResourceUrl('assets/edit.svg'));
+    icons.addSvgIcon('delete_doc', domSanitizer.bypassSecurityTrustResourceUrl('assets/delete.svg'));
 
   }
 }

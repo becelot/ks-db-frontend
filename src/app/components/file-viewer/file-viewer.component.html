@@ -4,7 +4,7 @@
       <ng-container *ngSwitchCase="0">
         <button mat-icon-button color="primary" (click)="createDocument()"><mat-icon svgIcon="add_doc"></mat-icon></button>
         <button mat-icon-button color="primary" (click)="createFolder()"><mat-icon svgIcon="add_folder"></mat-icon></button>
-        <button mat-raised-button color="primary" (click)="deleteSelectedDocuments()">Delete</button>
+        <button mat-icon-button color="primary" (click)="deleteSelectedDocuments()"><mat-icon svgIcon="delete_doc"></mat-icon></button>
       </ng-container>
       <ng-container *ngSwitchCase="1">
         <button mat-icon-button color="primary" (click)="editDocument()"><mat-icon svgIcon="edit_doc"></mat-icon></button>
