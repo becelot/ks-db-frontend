@@ -67,6 +67,9 @@ export class FileViewerComponent implements OnInit {
   }
 
   private async updatePath() {
+    if (!this.router.url.startsWith('/files')) {
+      return;
+    }
     let path: string = this.router.url.replace('/files', '');
 
     // Slice pre and post slashes of path
