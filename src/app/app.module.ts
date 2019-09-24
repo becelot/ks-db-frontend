@@ -36,26 +36,17 @@ import {ShowdownModule} from 'ngx-showdown';
 import { RegexReplaceExtension } from 'showdown';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {showdownHighlight} from './ext/show-highlight';
+import {MarkdownModule} from './components/markdown/markdown.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-const test = new RegExp('`Markdown`', 'g');
-console.log(test);
-
-// tslint:disable-next-line:only-arrow-functions
-export function id(text) {
-  return text;
-}
-
 export const mdToSdExtension: RegexReplaceExtension = {
   type: 'lang',
   regex: '`Markdown`',
-  replace: '<button mat-icon-button><mat-icon>folder</mat-icon></button>'
+  replace: '<custom-markdown></custom-markdown>'
 };
-
-console.log(mdToSdExtension);
 
 @NgModule({
   declarations: [
@@ -95,7 +86,8 @@ console.log(mdToSdExtension);
     MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    MarkdownModule
   ],
   providers: [
     {
