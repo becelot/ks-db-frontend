@@ -5,7 +5,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import Amplify, {Auth} from 'aws-amplify';
+import Amplify from '@aws-amplify/core';
+import Auth from '@aws-amplify/auth';
 
 const rememberMe = localStorage.getItem('rememberMe');
 // window['LOG_LEVEL'] = 'DEBUG';
@@ -46,8 +47,8 @@ Amplify.configure({
       },
       {
         name: 'LocalEndpoint',
-        endpoint: 'http://localhost:3000/',
-        // endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/',
+        // endpoint: 'http://localhost:3000/',
+        endpoint: 'https://sw1cn1pzzh.execute-api.us-east-1.amazonaws.com/dev/',
         custom_header: async () => {
           try {
             return { Authorization: (await Auth.currentAuthenticatedUser()).signInUserSession.idToken.jwtToken };
