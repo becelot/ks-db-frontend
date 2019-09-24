@@ -32,19 +32,30 @@ import {AuthGuard} from './components/auth/auth.guard';
 import { InputDialogComponent } from './components/dialogs/input-dialog/input-dialog.component';
 import {ShowdownModule} from 'ngx-showdown';
 
-import * as highlightExtension from 'showdown-highlight';
-import * as Showdown from 'showdown';
+
+import { RegexReplaceExtension } from 'showdown';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
+import {showdownHighlight} from './ext/show-highlight';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-const mdToSdExtension: Showdown.RegexReplaceExtension = {
+const test = new RegExp('`Markdown`', 'g');
+console.log(test);
+
+// tslint:disable-next-line:only-arrow-functions
+export function id(text) {
+  return text;
+}
+
+export const mdToSdExtension: RegexReplaceExtension = {
   type: 'lang',
-  regex: new RegExp('`Markdown`', 'g'),
+  regex: '`Markdown`',
   replace: '<button mat-icon-button><mat-icon>folder</mat-icon></button>'
 };
+
+console.log(mdToSdExtension);
 
 @NgModule({
   declarations: [
@@ -62,7 +73,7 @@ const mdToSdExtension: Showdown.RegexReplaceExtension = {
     BrowserModule,
     NavigationModule,
     ShowdownModule.forRoot({
-      extensions: [highlightExtension, mdToSdExtension]
+      extensions: [ showdownHighlight, mdToSdExtension]
     }),
     AppRoutingModule,
     AngularSvgIconModule,
