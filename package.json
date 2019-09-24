@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "deploy": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer && firebase deploy",
-    "build:prod": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer",
+    "deploy": "ng build --prod --build-optimizer false && firebase deploy",
+    "build:prod": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --build-optimizer false",
+    "dep": "ng build --stats-json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
