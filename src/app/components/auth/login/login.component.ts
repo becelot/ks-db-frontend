@@ -1,7 +1,6 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AmplifyService} from 'aws-amplify-angular';
-import {AuthClass} from 'aws-amplify';
+import {Auth, AuthClass} from 'aws-amplify';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
 import {CognitoUser} from 'amazon-cognito-identity-js';
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     remember: new FormControl('')
   });
 
-  constructor(private amplifyService: AmplifyService, private dialog: MatDialog, private router: Router, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
+  constructor(private dialog: MatDialog, private router: Router, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
     this.isDialog = !!dialogRef;
   }
 
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    const auth: AuthClass = this.amplifyService.auth();
+    const auth: AuthClass = Auth;
 
     if (this.loginForm.valid) {
       this.logginIn = true;

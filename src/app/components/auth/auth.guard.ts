@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AmplifyService} from 'aws-amplify-angular';
-import {AuthClass} from 'aws-amplify';
+import {AuthClass, Auth, Hub} from 'aws-amplify';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private amplifySerice: AmplifyService, private router: Router) {
-    const auth: AuthClass = this.amplifySerice.auth();
+  constructor(private router: Router) {
+    const auth: AuthClass = Auth;
+    console.log('Auth active');
     auth.currentUserPoolUser()
       .then(user => {
         this.loggedIn.next(true);
         this.userName.next(user.getUsername());
       })
       .catch(_ => {
-        this.loggedIn.next(true);
+        this.loggedIn.next(false);
         this.userName.next('');
       });
 
-    this.amplifySerice.authStateChange$.subscribe(state => {
-      this.loggedIn.next(state.state === 'signedIn');
-      if (state.user && state.user.username) {
-        this.userName.next(state.user.username);
+    Hub.listen('auth', data => {
+      this.loggedIn.next(data.payload.event === 'signedIn');
+      if (data.payload.data && data.payload.data.username) {
+        this.userName.next(data.payload.data.username);
       } else {
         this.userName.next('');
       }
@@ -34,13 +34,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const auth: AuthClass = this.amplifySerice.auth();
+    const auth: AuthClass = Auth;
     return auth.currentUserPoolUser().then(_ => true).catch(_ => this.router.parseUrl('/auth/login'));
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const auth: AuthClass = this.amplifySerice.auth();
+    const auth: AuthClass = Auth;
     return auth.currentUserPoolUser().then(_ => true).catch(_ => this.router.parseUrl('/auth/login'));
   }
 

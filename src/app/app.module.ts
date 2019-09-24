@@ -12,7 +12,6 @@ import { DocumentComponent } from './components/document/document.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import {AmplifyAngularModule, AmplifyService} from 'aws-amplify-angular';
 import { StartpageComponent } from './components/startpage/startpage.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import {AuthorizationComponent} from './components/auth/authorization/authorization.component';
@@ -62,7 +61,6 @@ const mdToSdExtension: Showdown.RegexReplaceExtension = {
   imports: [
     BrowserModule,
     NavigationModule,
-    AmplifyAngularModule,
     ShowdownModule.forRoot({
       extensions: [highlightExtension, mdToSdExtension]
     }),
@@ -93,7 +91,6 @@ const mdToSdExtension: Showdown.RegexReplaceExtension = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    AmplifyService,
     AuthGuard
   ],
   entryComponents: [

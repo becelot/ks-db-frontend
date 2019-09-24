@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AmplifyService} from 'aws-amplify-angular';
-import {AuthState} from 'aws-amplify-angular/dist/src/providers';
-import {AuthClass} from 'aws-amplify';
+import {Auth, AuthClass} from 'aws-amplify';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../auth/login/login.component';
 import {AuthGuard} from '../auth/auth.guard';
@@ -19,13 +17,13 @@ export class LayoutComponent {
 
   public userName: Observable<string>;
 
-  constructor(private authGuard: AuthGuard, private amplifyService: AmplifyService, private dialog: MatDialog ) {
+  constructor(private authGuard: AuthGuard, private dialog: MatDialog ) {
     this.signedIn = authGuard.LoggedIn;
     this.userName = authGuard.UserName;
   }
 
   public async  logout() {
-    const auth: AuthClass = this.amplifyService.auth();
+    const auth: AuthClass = Auth;
     await auth.signOut();
   }
 

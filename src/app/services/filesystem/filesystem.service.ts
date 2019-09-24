@@ -5,8 +5,7 @@ import {Folder} from '../../filesystem/folder';
 import {Document} from '../../filesystem/document';
 import {Router} from '@angular/router';
 import {AuthGuard} from '../../components/auth/auth.guard';
-import {AmplifyService} from 'aws-amplify-angular';
-import {APIClass} from 'aws-amplify';
+import {API, APIClass} from 'aws-amplify';
 import {TextDocument} from '../../filesystem/TextDocument';
 
 export enum DocType {
@@ -52,7 +51,7 @@ export class FilesystemService {
   private _fileSystem: Filesystem = new Filesystem();
   private _currentPath: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor(private router: Router, private auth: AuthGuard, private amplifyService: AmplifyService) {
+  constructor(private router: Router, private auth: AuthGuard) {
   }
 
 
@@ -63,14 +62,14 @@ export class FilesystemService {
 
   public navigateChild(document: string) {
     const current = this._currentPath.getValue();
-    current.push(document)
+    current.push(document);
     this._currentPath.next(current);
   }
 
   public async createFolder(folder: Folder, name: string): Promise<Document> {
     const path = folder.Path;
     console.log(folder);
-    const api: APIClass = this.amplifyService.api();
+    const api: APIClass = API;
     const response = await api.post('LocalEndpoint', 'files/create', {
       response: true,
       body: {
@@ -90,7 +89,7 @@ export class FilesystemService {
   public async createDocument(folder: Folder, name: string): Promise<Document> {
     const path = folder.Path;
 
-    const api: APIClass = this.amplifyService.api();
+    const api: APIClass = API;
     const response = await api.post('LocalEndpoint', 'files/create', {
       response: true,
       body: {
@@ -108,7 +107,7 @@ export class FilesystemService {
   }
 
   public async syncDocument(doc: TextDocument): Promise<TextDocument> {
-    const api: APIClass = this.amplifyService.api();
+    const api: APIClass = API;
     const path = doc.Path;
 
     const response = await api.post('LocalEndpoint', 'files/update', {
@@ -124,7 +123,7 @@ export class FilesystemService {
 
   public async resolveDocument(path: string): Promise<Document> {
     console.log(path);
-    const api: APIClass = this.amplifyService.api();
+    const api: APIClass = API;
     let doc: Document = this._fileSystem.resolveOrFail(path);
     console.log(doc);
     // if the document was not yet created, retrieve it from the server
@@ -175,7 +174,7 @@ export class FilesystemService {
   }
 
   public async deleteDocument(doc: Document): Promise<void> {
-    const api: APIClass = this.amplifyService.api();
+    const api: APIClass = API;
     const path: string = doc.Path;
 
     // try to delete the resource

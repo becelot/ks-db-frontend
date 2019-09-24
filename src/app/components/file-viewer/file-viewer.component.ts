@@ -1,9 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FilesystemService} from '../../services/filesystem/filesystem.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {AmplifyService} from 'aws-amplify-angular';
-import {APIClass} from 'aws-amplify';
-import {Doctype} from '@angular/compiler/src/i18n/serializers/xml_helper';
 import {Document} from '../../filesystem/document';
 import {Folder} from '../../filesystem/folder';
 import {MatDialog} from '@angular/material';
@@ -49,10 +46,10 @@ export class FileViewerComponent implements OnInit {
 
   // Content view
   private textDoc: TextDocument;
-  private content: string;
+  public content: string;
 
   // Edit view content
-  private editContent: string;
+  public editContent: string;
   public editorOptions = {theme: 'vs', language: 'markdown'};
 
   // Error view
@@ -61,8 +58,7 @@ export class FileViewerComponent implements OnInit {
 
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
-              private router: Router,
-              private amplifyService: AmplifyService) {
+              private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updatePath(event.url);
