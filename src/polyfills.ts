@@ -69,3 +69,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 (window as any).process = {
   env: { DEBUG: undefined },
 };
+
+// Angular elements es5 adapter
+import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
