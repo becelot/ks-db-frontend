@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router) {
     const auth: AuthClass = Auth;
-    console.log('Auth active');
+
     auth.currentUserPoolUser()
       .then(user => {
         this.loggedIn.next(true);
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       });
 
     Hub.listen('auth', data => {
-      this.loggedIn.next(data.payload.event === 'signedIn');
+      this.loggedIn.next(data.payload.event === 'signIn');
       if (data.payload.data && data.payload.data.username) {
         this.userName.next(data.payload.data.username);
       } else {
