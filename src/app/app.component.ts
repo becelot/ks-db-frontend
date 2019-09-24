@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {Auth, AuthClass} from 'aws-amplify';
-import {CognitoUser, CognitoUserSession} from 'amazon-cognito-identity-js';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 
