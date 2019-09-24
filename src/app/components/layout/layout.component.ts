@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Auth, AuthClass} from 'aws-amplify';
+import Auth, {AuthClass} from '@aws-amplify/auth';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../auth/login/login.component';
 import {AuthGuard} from '../auth/auth.guard';

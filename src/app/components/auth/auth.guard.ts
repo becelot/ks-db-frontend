@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AuthClass, Auth, Hub} from 'aws-amplify';
+import Auth, {AuthClass} from '@aws-amplify/auth';
+import {Hub} from '@aws-amplify/core';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {

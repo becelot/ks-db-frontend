@@ -1,6 +1,6 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Auth, AuthClass} from 'aws-amplify';
+import Auth, {AuthClass} from '@aws-amplify/auth';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
 import {CognitoUser} from 'amazon-cognito-identity-js';

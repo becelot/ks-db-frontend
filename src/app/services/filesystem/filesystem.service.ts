@@ -5,7 +5,7 @@ import {Folder} from '../../filesystem/folder';
 import {Document} from '../../filesystem/document';
 import {Router} from '@angular/router';
 import {AuthGuard} from '../../components/auth/auth.guard';
-import {API, APIClass} from 'aws-amplify';
+import API, {APIClass} from '@aws-amplify/api';
 import {TextDocument} from '../../filesystem/TextDocument';
 
 export enum DocType {
