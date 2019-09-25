@@ -45,7 +45,16 @@ export class LayoutComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const hammertime = new Hammer(this.ref.nativeElement, {});
-    hammertime.on('panright', () => this.sidenavOpen = true);
-    hammertime.on('panleft', () => this.sidenavOpen = true);
+    hammertime.get('pan').set({ threshold: 100});
+    hammertime.on('panright', (ev) => {
+      if (ev.pointerType !== 'mouse') {
+        this.sidenavOpen = true;
+      }
+    });
+    hammertime.on('panleft', (ev) => {
+      if (ev.pointerType !== 'mouse') {
+        this.sidenavOpen = false;
+      }
+    });
   }
 }
