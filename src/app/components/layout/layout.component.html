@@ -1,6 +1,9 @@
 <mat-toolbar color="primary">
-  <div style="width: 100%">
-    KS-DB
+  <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between">
+    <div style="display: flex; flex-direction: row">
+      <button mat-icon-button (click)="toggleNav()"><mat-icon>menu</mat-icon></button>
+      <span style="line-height: 40px;">KS-DB</span>
+    </div>
     <div style="float: right">
       <ng-container *ngIf="signedIn | async">
         <div fxLayout="row" fxLayoutAlign="center">
@@ -21,7 +24,7 @@
 
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav [opened]="true" mode="side" position="start" class="sidenav-toolbar">
+  <mat-sidenav [opened]="sidenavOpen" mode="side" position="start" class="sidenav-toolbar">
     <ks-navigation-panel></ks-navigation-panel>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">

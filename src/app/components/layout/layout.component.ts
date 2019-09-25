@@ -17,6 +17,8 @@ export class LayoutComponent {
 
   public userName: Observable<string>;
 
+  public sidenavOpen = true;
+
   constructor(private authGuard: AuthGuard, private dialog: MatDialog ) {
     this.signedIn = authGuard.LoggedIn;
     this.userName = authGuard.UserName;
@@ -31,6 +33,10 @@ export class LayoutComponent {
     this.dialog.open(LoginComponent, {
       width: '500px'
     });
+  }
+
+  public toggleNav() {
+    this.sidenavOpen = !this.sidenavOpen;
   }
 
 }
