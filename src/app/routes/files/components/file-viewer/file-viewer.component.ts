@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injector, Input, OnInit} from '@angular/core';
 import {FilesystemService} from '../../services/filesystem/filesystem.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Document} from '../../types/document';
@@ -6,6 +6,8 @@ import {Folder} from '../../types/folder';
 import {MatDialog} from '@angular/material';
 import {InputDialogComponent} from '../../../../components/dialogs/input-dialog/input-dialog.component';
 import {TextDocument} from '../../types/TextDocument';
+import {createCustomElement} from '@angular/elements';
+import {CustomMarkdownComponent} from '../markdown/custom-markdown/custom-markdown.component';
 
 
 export enum DocType {
@@ -58,6 +60,7 @@ export class FileViewerComponent implements OnInit {
 
   constructor(private filesystem: FilesystemService,
               private dialog: MatDialog,
+              private injector: Injector,
               private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -66,6 +69,9 @@ export class FileViewerComponent implements OnInit {
     });
 
     this.updatePath(this.router.url);
+
+    const customMarkdownComponent = createCustomElement(CustomMarkdownComponent, {injector});
+    customElements.define('custom-markdown', customMarkdownComponent);
   }
 
   private async updatePath(url: string) {

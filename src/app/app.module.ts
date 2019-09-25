@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { DocumentComponent } from './routes/files/components/document/document.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -16,7 +15,7 @@ import {AuthorizationComponent} from './components/auth/authorization/authorizat
 import {
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
-  MatDialog, MatDialogModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatMenuModule, MatProgressSpinnerModule,
@@ -28,13 +27,9 @@ import { WarningDialogComponent } from './components/dialogs/warning-dialog/warn
 import {NavigationModule} from './components/navigation/navigation.module';
 import {AuthGuard} from './components/auth/auth.guard';
 import { InputDialogComponent } from './components/dialogs/input-dialog/input-dialog.component';
-import {ShowdownModule} from 'ngx-showdown';
 
 
 import { RegexReplaceExtension } from 'showdown';
-import {MonacoEditorModule} from 'ngx-monaco-editor';
-import {showdownHighlight} from './ext/show-highlight';
-import {MarkdownModule} from './components/markdown/markdown.module';
 import {ApiService} from './services/apiservice/api.service';
 import {AuthService} from './services/authservice/auth.service';
 
@@ -79,8 +74,7 @@ export const mdToSdExtension: RegexReplaceExtension = {
     MatCheckboxModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ReactiveFormsModule,
-    MarkdownModule
+    ReactiveFormsModule
   ],
   providers: [
     {

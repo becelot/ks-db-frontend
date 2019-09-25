@@ -20,7 +20,7 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
-import {MarkdownModule} from '../../components/markdown/markdown.module';
+import {MarkdownModule} from './components/markdown/markdown.module';
 import {ShowdownModule} from 'ngx-showdown';
 import {showdownHighlight} from '../../ext/show-highlight';
 import {mdToSdExtension} from '../../app.module';
