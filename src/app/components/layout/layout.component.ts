@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import Auth, {AuthClass} from '@aws-amplify/auth';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../auth/login/login.component';
 import {AuthGuard} from '../auth/auth.guard';
 import {Observable} from 'rxjs';
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'ks-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {
+export class LayoutComponent implements AfterViewInit {
   title = 'ks-db-frontend';
 
   public signedIn: Observable<boolean>;
@@ -18,6 +19,9 @@ export class LayoutComponent {
   public userName: Observable<string>;
 
   public sidenavOpen = true;
+
+  @ViewChild('content', { read: ElementRef, static: true}) ref: ElementRef;
+
 
   constructor(private authGuard: AuthGuard, private dialog: MatDialog ) {
     this.signedIn = authGuard.LoggedIn;
@@ -39,4 +43,9 @@ export class LayoutComponent {
     this.sidenavOpen = !this.sidenavOpen;
   }
 
+  ngAfterViewInit(): void {
+    const hammertime = new Hammer(this.ref.nativeElement, {});
+    hammertime.on('panright', () => this.sidenavOpen = true);
+    hammertime.on('panleft', () => this.sidenavOpen = true);
+  }
 }
