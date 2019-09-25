@@ -1,10 +1,11 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import Auth, {AuthClass} from '@aws-amplify/auth';
+import {AuthClass} from '@aws-amplify/auth';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {WarningDialogComponent} from '../../dialogs/warning-dialog/warning-dialog.component';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../services/authservice/auth.service';
 
 @Component({
   selector: 'ks-login',
@@ -22,7 +23,10 @@ export class LoginComponent implements OnInit {
     remember: new FormControl('')
   });
 
-  constructor(private dialog: MatDialog, private router: Router, @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
+  constructor(private dialog: MatDialog,
+              private router: Router,
+              private authService: AuthService,
+              @Optional() private dialogRef: MatDialogRef<LoginComponent>) {
     this.isDialog = !!dialogRef;
   }
 
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    const auth: AuthClass = Auth;
+    const auth: AuthClass = this.authService.Auth;
 
     if (this.loginForm.valid) {
       this.logginIn = true;

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {FileViewerComponent} from './components/file-viewer/file-viewer.component';
+import {FileViewerComponent} from './routes/files/components/file-viewer/file-viewer.component';
 import {AuthorizationComponent} from './components/auth/authorization/authorization.component';
 import {LoginComponent} from './components/auth/login/login.component';
 import {LayoutComponent} from './components/layout/layout.component';
@@ -21,8 +21,8 @@ const routes: Routes = [
         loadChildren: () => import('./routes/startpage/startpage.module').then(m => m.StartpageModule)
       },
        { path: 'files',
-        canActivate: [AuthGuard],
-        children: [ { path: '**', component: FileViewerComponent } ]
+         canActivate: [AuthGuard],
+         loadChildren: () => import('./routes/files/files.module').then(m => m.FilesModule)
       },
       {
         path: '',

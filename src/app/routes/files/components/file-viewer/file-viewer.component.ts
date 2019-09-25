@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FilesystemService} from '../../services/filesystem/filesystem.service';
 import {NavigationEnd, Router} from '@angular/router';
-import {Document} from '../../filesystem/document';
-import {Folder} from '../../filesystem/folder';
+import {Document} from '../../types/document';
+import {Folder} from '../../types/folder';
 import {MatDialog} from '@angular/material';
-import {InputDialogComponent} from '../dialogs/input-dialog/input-dialog.component';
-import {TextDocument} from '../../filesystem/TextDocument';
+import {InputDialogComponent} from '../../../../components/dialogs/input-dialog/input-dialog.component';
+import {TextDocument} from '../../types/TextDocument';
 
 
 export enum DocType {

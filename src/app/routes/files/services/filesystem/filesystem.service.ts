@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Filesystem} from '../../filesystem/filesystem';
-import {Folder} from '../../filesystem/folder';
-import {Document} from '../../filesystem/document';
+import {Filesystem} from '../../types/filesystem';
+import {Folder} from '../../types/folder';
+import {Document} from '../../types/document';
 import {Router} from '@angular/router';
-import {AuthGuard} from '../../components/auth/auth.guard';
-import API, {APIClass} from '@aws-amplify/api';
-import {TextDocument} from '../../filesystem/TextDocument';
+import {AuthGuard} from '../../../../components/auth/auth.guard';
+import {TextDocument} from '../../types/TextDocument';
+import {ApiService} from '../../../../services/apiservice/api.service';
 
 export enum DocType {
   DOC_FOLDER,
@@ -43,15 +43,13 @@ interface IGetDocumentResponse {
   data: IGetDocumentFolderResponse | IGetDocumentTextResponse;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FilesystemService {
 
   private _fileSystem: Filesystem = new Filesystem();
   private _currentPath: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor(private router: Router, private auth: AuthGuard) {
+  constructor(private router: Router, private auth: AuthGuard, private apiService: ApiService) {
   }
 
 
@@ -68,9 +66,8 @@ export class FilesystemService {
 
   public async createFolder(folder: Folder, name: string): Promise<Document> {
     const path = folder.Path;
-    console.log(folder);
-    const api: APIClass = API;
-    const response = await api.post('LocalEndpoint', 'files/create', {
+
+    const response = await this.apiService.API.post('LocalEndpoint', 'files/create', {
       response: true,
       body: {
         documentName: name,
@@ -89,8 +86,7 @@ export class FilesystemService {
   public async createDocument(folder: Folder, name: string): Promise<Document> {
     const path = folder.Path;
 
-    const api: APIClass = API;
-    const response = await api.post('LocalEndpoint', 'files/create', {
+    const response = await this.apiService.API.post('LocalEndpoint', 'files/create', {
       response: true,
       body: {
         documentName: name,
@@ -107,10 +103,9 @@ export class FilesystemService {
   }
 
   public async syncDocument(doc: TextDocument): Promise<TextDocument> {
-    const api: APIClass = API;
     const path = doc.Path;
 
-    const response = await api.post('LocalEndpoint', 'files/update', {
+    const response = await this.apiService.API.post('LocalEndpoint', 'files/update', {
       response: true,
       body: {
         path: doc.Path,
@@ -122,21 +117,21 @@ export class FilesystemService {
   }
 
   public async resolveDocument(path: string): Promise<Document> {
-    console.log(path);
-    const api: APIClass = API;
     let doc: Document = this._fileSystem.resolveOrFail(path);
-    console.log(doc);
+
     // if the document was not yet created, retrieve it from the server
     if (doc === undefined || !doc.loaded) {
+
       // try to resolve from backend
       let result: IGetDocumentResponse;
       try {
-        result = await api.post('LocalEndpoint', 'files/content', {
+        result = await this.apiService.API.post('LocalEndpoint', 'files/content', {
           response: true,
           body: {
             path: !!doc ? doc.Path : (path !== '' ? `/${path}` : '')
           }
         });
+
       } catch (e) {
         throw new Error(`Error: Could not resolve path`);
       }
@@ -174,12 +169,11 @@ export class FilesystemService {
   }
 
   public async deleteDocument(doc: Document): Promise<void> {
-    const api: APIClass = API;
     const path: string = doc.Path;
 
     // try to delete the resource
     try {
-      await api.post('LocalEndpoint', 'files/delete', {
+      await this.apiService.API.post('LocalEndpoint', 'files/delete', {
         response: true,
         body: {
           path

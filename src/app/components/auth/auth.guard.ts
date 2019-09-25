@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
-import Auth, {AuthClass} from '@aws-amplify/auth';
 import {Hub} from '@aws-amplify/core';
+import {AuthService} from '../../services/authservice/auth.service';
+import {AuthClass} from '@aws-amplify/auth';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private userName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private router: Router) {
-    const auth: AuthClass = Auth;
+  constructor(private router: Router, private authService: AuthService) {
+    const auth: AuthClass = authService.Auth;
 
     auth.currentUserPoolUser()
       .then(user => {
@@ -35,13 +36,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const auth: AuthClass = Auth;
+    const auth: AuthClass = this.authService.Auth;
     return auth.currentUserPoolUser().then(_ => true).catch(_ => this.router.parseUrl('/auth/login'));
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const auth: AuthClass = Auth;
+    const auth: AuthClass = this.authService.Auth;
     return auth.currentUserPoolUser().then(_ => true).catch(_ => this.router.parseUrl('/auth/login'));
   }
 
