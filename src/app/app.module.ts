@@ -12,7 +12,6 @@ import { DocumentComponent } from './components/document/document.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import { StartpageComponent } from './components/startpage/startpage.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import {AuthorizationComponent} from './components/auth/authorization/authorization.component';
 import {
@@ -37,6 +36,7 @@ import { RegexReplaceExtension } from 'showdown';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {showdownHighlight} from './ext/show-highlight';
 import {MarkdownModule} from './components/markdown/markdown.module';
+import {StartpageModule} from './routes/startpage/startpage.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -53,7 +53,6 @@ export const mdToSdExtension: RegexReplaceExtension = {
     AppComponent,
     FileViewerComponent,
     DocumentComponent,
-    StartpageComponent,
     LoginComponent,
     AuthorizationComponent,
     LayoutComponent,
