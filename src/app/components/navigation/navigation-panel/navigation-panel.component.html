@@ -1,6 +1,17 @@
 <div fxLayout="column" class="navigation-panel-container">
   <ng-container [ngSwitch]="loggedIn">
-    <div *ngSwitchCase="true"><a routerLink="/files">FileSystem</a></div>
+    <div *ngSwitchCase="true">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/start" class="link">
+          <mat-icon svgIcon="dashboard" mat-list-icon></mat-icon>
+          <span style="margin-left: 10px"> Dashboard </span>
+        </a>
+        <a mat-list-item routerLink="/files" class="link">
+          <mat-icon svgIcon="database" mat-list-icon></mat-icon>
+          <span style="margin-left: 10px"> Files </span>
+        </a>
+      </mat-nav-list>
+    </div>
     <p class="mat-body-strong" *ngSwitchCase="false">Please login to use the navigation panel!</p>
   </ng-container>
 </div>

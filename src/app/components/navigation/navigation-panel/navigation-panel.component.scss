@@ -9,3 +9,11 @@
   height: 100%;
   padding: 10px;
 }
+
+.link {
+  height: 36px !important;
+
+  &:hover {
+    color: #c2185b;
+  }
+}

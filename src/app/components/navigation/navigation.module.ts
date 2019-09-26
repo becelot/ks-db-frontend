@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
+import {MatIconModule, MatListModule} from '@angular/material';
 
 
 
@@ -14,6 +15,8 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     FlexLayoutModule,
+    MatListModule,
+    MatIconModule,
     RouterModule
   ]
 })
