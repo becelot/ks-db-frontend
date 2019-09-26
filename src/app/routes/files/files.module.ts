@@ -25,6 +25,7 @@ import {ShowdownModule} from 'ngx-showdown';
 import {showdownHighlight} from '../../ext/show-highlight';
 import {mdToSdExtension} from '../../app.module';
 import {DocumentComponent} from './components/document/document.component';
+import {MarkdownService} from './components/markdown/services/markdown.service';
 
 
 
@@ -52,13 +53,13 @@ import {DocumentComponent} from './components/document/document.component';
     FormsModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
-    MarkdownModule,
+    MarkdownModule.forRoot(),
     ShowdownModule.forRoot({
       extensions: [ showdownHighlight, mdToSdExtension]
     }),
   ],
   providers: [
-    FilesystemService
+    FilesystemService,
   ],
   exports: [
     FileViewerComponent,
