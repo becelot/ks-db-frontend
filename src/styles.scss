@@ -1,9 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~highlight.js/scss/github";
+@import "~highlight.js/scss/dark";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #303030 }
 
 a {
   color: #ff9b33;
+}
+
+.hljs {
+  background: #212733;
+  padding: 1.5625rem;
+  border-radius: 5px;
+  line-height: 19px;
+  font-size: 15px;
+  overflow: auto;
+  border-left: 8px solid #3c4654;
+  margin: 0 0 1.25rem 0;
 }
