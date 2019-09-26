@@ -20,6 +20,7 @@ export class NavigationPanelComponent implements OnInit {
 
     iconRegistry.addSvgIcon('database', domSanitizer.bypassSecurityTrustResourceUrl('assets/database.svg'));
     iconRegistry.addSvgIcon('dashboard', domSanitizer.bypassSecurityTrustResourceUrl('assets/home.svg'));
+    iconRegistry.addSvgIcon('projects', domSanitizer.bypassSecurityTrustResourceUrl('assets/project-management.svg'));
   }
 
   ngOnInit() {
