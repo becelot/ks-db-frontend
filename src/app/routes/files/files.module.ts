@@ -55,7 +55,8 @@ import {MarkdownService} from './components/markdown/services/markdown.service';
     MonacoEditorModule.forRoot(),
     MarkdownModule.forRoot(),
     ShowdownModule.forRoot({
-      extensions: [ showdownHighlight, mdToSdExtension]
+      extensions: [ showdownHighlight, mdToSdExtension],
+      tables: true
     }),
   ],
   providers: [
