@@ -35,3 +35,19 @@
   padding-bottom: 3px;
   border-bottom: 3px solid #c2185b;
 }
+
+:host::ng-deep table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: #fff;
+
+  & th, td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+
+  & tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+
+}
