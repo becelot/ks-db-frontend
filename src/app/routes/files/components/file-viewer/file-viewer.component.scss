@@ -12,7 +12,7 @@
   margin: 0 5px 5px 5px;
   border-radius: 0 0 7px 7px;
   padding: 20px 10px 20px 20px;
-  background: azure;
+  background: #F3F3F3;
   position: relative;
   max-height: calc(100% - 85px);
   flex: 1 0 0;
@@ -27,6 +27,19 @@
   width: 100%;
   display: flex;
   flex-flow: row wrap;
+}
+
+.showdown-wrapper {
+  width: calc(100% - 280px);
+  display: flex;
+  flex-flow: row wrap;
+
+  padding: 53px 65px;
+  max-width: 900px;
+  border-radius: 9px;
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.15);
+  margin: 60px auto 20px auto;
 }
 
 :host::ng-deep h1 {
