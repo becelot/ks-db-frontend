@@ -56,7 +56,8 @@ import {MarkdownService} from './components/markdown/services/markdown.service';
     MarkdownModule.forRoot(),
     ShowdownModule.forRoot({
       extensions: [ showdownHighlight, mdToSdExtension],
-      tables: true
+      tables: true,
+      tasklists: true
     }),
   ],
   providers: [
