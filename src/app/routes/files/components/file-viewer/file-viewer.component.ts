@@ -76,7 +76,7 @@ export class FileViewerComponent implements OnInit {
       return;
     }
 
-    let path: string = url.replace('/files', '');
+    let path: string = decodeURIComponent(url.replace('/files', ''));
 
     // Slice pre and post slashes of path
     if (path[0] === '/') {
