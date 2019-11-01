@@ -6,6 +6,8 @@
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
+
+  max-width: 100%;
 }
 
 .file-viewer-container {
@@ -63,4 +65,8 @@
     background-color: #f6f8fa;
   }
 
+}
+
+:host::ng-deep img {
+  max-width: 100%;
 }
