@@ -26,6 +26,7 @@ import {showdownHighlight} from '../../ext/show-highlight';
 import {mdToSdExtension} from '../../app.module';
 import {DocumentComponent} from './components/document/document.component';
 import {MarkdownService} from './components/markdown/services/markdown.service';
+import {NgxMultiLineEllipsisModule} from 'ngx-multi-line-ellipsis';
 
 
 
@@ -50,6 +51,7 @@ import {MarkdownService} from './components/markdown/services/markdown.service';
     MatMenuModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    NgxMultiLineEllipsisModule,
     FormsModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),

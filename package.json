@@ -34,6 +34,7 @@
     "highlight.js": "^9.15.10",
     "html-encoder-decoder": "^1.3.8",
     "ngx-monaco-editor": "^8.1.0",
+    "ngx-multi-line-ellipsis": "^1.0.4",
     "ngx-perfect-scrollbar": "^8.0.0",
     "ngx-showdown": "^5.0.0",
     "rxjs": "~6.4.0",
