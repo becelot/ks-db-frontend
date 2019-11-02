@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import AuthClass from '@aws-amplify/auth/lib/Auth';
+import { AuthClass } from '@aws-amplify/auth';
 import Auth from '@aws-amplify/auth';
 
 @Injectable({
