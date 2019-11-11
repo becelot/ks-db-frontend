@@ -25,6 +25,10 @@ const routes: Routes = [
          loadChildren: () => import('./routes/files/files.module').then(m => m.FilesModule)
       },
       {
+        path: 'sso',
+        loadChildren: () => import('./routes/single-sign-on/single-sign-on.module').then(m => m.SingleSignOnModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'start'
