@@ -2,11 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SingleSignOnComponent } from './single-sign-on/single-sign-on.component';
 import {RouterModule, Routes} from '@angular/router';
+import { SingleSignOnRoadmapComponent } from './single-sign-on-roadmap/single-sign-on-roadmap.component';
+import {MatCheckboxModule} from '@angular/material';
 
 const routes: Routes = [
   {
     path: '',
-    component: SingleSignOnComponent
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: SingleSignOnRoadmapComponent
+      },
+      {
+        path: 'preview',
+        component: SingleSignOnComponent
+      }
+    ]
   }
 ];
 
@@ -15,14 +27,16 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  declarations: []
 })
 export class SingleSignOnRoutingModule { }
 
 @NgModule({
-  declarations: [SingleSignOnComponent],
+  declarations: [SingleSignOnComponent, SingleSignOnRoadmapComponent],
   imports: [
     SingleSignOnRoutingModule,
+    MatCheckboxModule,
     CommonModule
   ]
 })

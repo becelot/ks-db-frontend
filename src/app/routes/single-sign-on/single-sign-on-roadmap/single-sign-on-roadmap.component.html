@@ -1,0 +1,32 @@
+<div class="sso-container">
+  <div class="sso">
+    <h1 class="mat-h1 sso-header">Single Sign-On is now in active development!</h1>
+    <p class="mat-body">Roadmap:</p>
+    <ul class="mat-body" style="list-style-type: none">
+      <li>
+        <mat-checkbox checked disabled>Define data structures in backend</mat-checkbox>
+        <ul style="list-style-type: none">
+          <li><mat-checkbox checked disabled>Must contain AWS account ids and display name for account</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>Must be groupable</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>A group may be associated to one or more users</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>A account can have multiple roles that the user can log into</mat-checkbox></li>
+        </ul>
+      </li>
+      <li><mat-checkbox checked disabled>Define and implement REST endpoints to retrieve the data</mat-checkbox>
+        <ul style="list-style-type: none">
+          <li><mat-checkbox checked disabled>Mock data endpoint that initializes mock database with data</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>Endpoint that retrieves all groups and accounts associated with a user</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>Investigate how to actually sign in the user</mat-checkbox></li>
+        </ul>
+      </li>
+      <li><mat-checkbox checked disabled>Implement frontend Angular representation</mat-checkbox>
+        <ul style="list-style-type: none">
+          <li><mat-checkbox checked disabled>Implement Account preview and option selector</mat-checkbox></li>
+          <li><mat-checkbox checked disabled>Implement SSO flow to automatically sign in the user</mat-checkbox></li>
+        </ul>
+      </li>
+
+    </ul>
+    <p class="mat-body"><a routerLink="/sso/preview">Preview</a></p>
+  </div>
+</div>
