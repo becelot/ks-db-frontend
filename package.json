@@ -31,7 +31,7 @@
     "@webcomponents/webcomponentsjs": "^2.3.0",
     "angular-svg-icon": "^8.0.0",
     "hammerjs": "^2.0.8",
-    "highlight.js": "^9.15.10",
+    "highlight.js": "^10.1.2",
     "html-encoder-decoder": "^1.3.8",
     "ngx-monaco-editor": "^8.1.0",
     "ngx-multi-line-ellipsis": "^1.0.4",
